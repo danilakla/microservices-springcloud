@@ -1,0 +1,11 @@
+server:
+  port: 8888
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      server:
+        encrypt.enabled: false
+        git:
+          uri: https://github.com/danilakla/microservice-configuration-repository.git

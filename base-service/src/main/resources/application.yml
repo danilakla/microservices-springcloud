@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: baseservice
+  profiles:
+    active:
+      default
+  config:
+    import: configserver:http://localhost:8888
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
