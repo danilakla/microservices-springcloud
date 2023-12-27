@@ -11,11 +11,11 @@ public class TestController {
     @Value("${test}")
     private String exampleProperty;
     @Autowired
-    private OrganizationFeignClient organizationFeignClient;
+    private TestService testService;
 
     @GetMapping(value = "/")
     public String getValue() {
-       String d= organizationFeignClient.getOrganization();
-        return "d";
+       String d= testService.callbaseserver();
+        return d;
     }
 }

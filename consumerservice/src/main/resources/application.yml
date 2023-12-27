@@ -16,3 +16,39 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+management:
+  health:
+    circuit-breakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+resilience4j:
+  circuit-breaker:
+    instances:
+      testa:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5 #if drop  the number of req go to open state
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s # wait move from open to half-open state
+        permittedNumberOfCallsInHalfOpenState: 3 # if in half-open fail 3 req go to open state
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+#  retry:
+#    instances:
+#      testa:
+#        max-attempts: 5
+#        wait-duration: 10s
+#    ratelimiter:
+#    instances:
+#      consumerservice:
+#        registerHealthIndicator: false
+#        limitForPeriod: 10
+#        limitRefreshPeriod: 10s
+#        timeoutDuration: 3s
